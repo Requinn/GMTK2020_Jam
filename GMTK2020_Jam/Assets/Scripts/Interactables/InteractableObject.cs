@@ -17,7 +17,7 @@ public class InteractableObject : MonoBehaviour
     [SerializeField]
     private GameObject _textCanvas;
     [SerializeField]
-    private MeshRenderer _renderer;
+    private Renderer _renderer;
     [SerializeField]
     private Material[] _materials;
     [SerializeField]
@@ -37,25 +37,51 @@ public class InteractableObject : MonoBehaviour
     public UnityEvent onInteractSuccessUnityAction;
     public UnityEvent onInteractFailUnityAction;
 
-    private void Start() {
+    private Color prevColor;
+    
+    protected virtual void Start() 
+    {
+        _textCanvas.SetActive(false);
+        
         if (_renderer == null)
         {
-            _renderer = GetComponent<MeshRenderer>();
+            _renderer = GetComponent<Renderer>();
         }
-        _textCanvas.SetActive(false);
-        _renderer.material = _materials[0];
-        
-        _textCanvas.SetActive(false);
+        if (_renderer != null)
+        {
+            if (_renderer.GetType() == (typeof(MeshRenderer)))
+            {
+                _renderer.material = _materials[0];
+            }
+            
+            if(_renderer.GetType() == (typeof(SpriteRenderer)))
+            {
+                prevColor = ((SpriteRenderer) _renderer).color;
+            }
+        }
     }
     public void OnMouseEnter() {
         if(!isInteractable)
             return;
         //Mouse Entered
         _textCanvas.SetActive(true);
-        _renderer.material = _materials[1];
-        _renderer.material.SetColor("_OutlineColor", _outlineColor);
-        _renderer.material.SetColor("_Color", Color.white);
-        _renderer.material.SetFloat("_Outline", thickness);
+
+        if (_renderer != null)
+        {
+            if (_renderer.GetType() == (typeof(MeshRenderer)))
+            {
+                ((MeshRenderer)_renderer).material = _materials[1];
+                ((MeshRenderer)_renderer).material.SetColor("_OutlineColor", _outlineColor);
+                ((MeshRenderer)_renderer).material.SetColor("_Color", Color.white);
+                ((MeshRenderer)_renderer).material.SetFloat("_Outline", thickness);
+            }
+            
+            if (_renderer.GetType() == (typeof(SpriteRenderer)))
+            {
+                ((SpriteRenderer) _renderer).color = _outlineColor;
+            }
+            
+        }
 
         if (audioSource != null && onHoverSounds.Length > 0)
         {
@@ -66,7 +92,19 @@ public class InteractableObject : MonoBehaviour
     public void OnMouseExit() {
         //Mouse Left
         _textCanvas.SetActive(false);
-        _renderer.material = _materials[0];
+        
+        if (_renderer != null)
+        {
+            if (_renderer.GetType() == (typeof(MeshRenderer)))
+            {
+                _renderer.material = _materials[0];
+            }
+            if (_renderer != null && _renderer.GetType() == (typeof(SpriteRenderer)))
+            {
+                ((SpriteRenderer) _renderer).color = prevColor;
+            }
+        }
+
     }
 
     public void OnMouseOver() {
