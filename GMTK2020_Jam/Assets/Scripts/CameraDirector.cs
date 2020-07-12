@@ -25,6 +25,7 @@ public class CameraDirector : MonoBehaviour
         _fadeScreen.gameObject.SetActive(false);
 
         for (int i = 1; i < _scenes.Length; i++){
+            _scenes[i].sceneRoot.SetActive(false);
             _scenes[i].camera.gameObject.SetActive(false);
             _scenes[i].camera.GetComponent<AudioListener>().enabled = false;
         }
@@ -58,8 +59,11 @@ public class CameraDirector : MonoBehaviour
             yield return 0.0f;
         }
         //turn current camera off and go to new camera 
+        _scenes[_currentScene].sceneRoot.SetActive(false);
         _scenes[_currentScene].camera.gameObject.SetActive(false);
         _scenes[_currentScene].camera.GetComponent<AudioListener>().enabled = false;
+        
+        _scenes[toScene].sceneRoot.SetActive(true);
         _scenes[toScene].camera.gameObject.SetActive(true);
         _scenes[toScene].camera.GetComponent<AudioListener>().enabled = true;
 
@@ -86,6 +90,7 @@ public class CameraDirector : MonoBehaviour
 [Serializable]
 public class SceneData : IComparable<SceneData> {
     public Camera camera;
+    public GameObject sceneRoot;
     [Min(0)]
     public int sceneID;
     SceneData(Camera c, int id) {
