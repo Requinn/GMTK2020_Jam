@@ -14,7 +14,7 @@ public class PhoneTextReciever : MonoBehaviour
     [SerializeField]
     private AudioClip _phonePing;
     [SerializeField]
-    private AudioSource _phoneAudioSrc;
+    private AudioSource audioSource;
 
     private bool _isShowingMessages = false;
 
@@ -35,6 +35,7 @@ public class PhoneTextReciever : MonoBehaviour
 
     public void StartPhoneSequence(int storyBeat) {
         if (_isShowingMessages) return;
+        ShowPhone();
         StartCoroutine(ShowMessages(_beats[storyBeat]));
     }
 
@@ -42,10 +43,11 @@ public class PhoneTextReciever : MonoBehaviour
         _isShowingMessages = true;
         WaitForSeconds delay = new WaitForSeconds(_messageDelay);
         int count = 0;
-        beat.rootObject.SetActive(false);
+        beat.rootObject.SetActive(true);
         while (count < beat.messages.Length) {
             yield return delay;
             beat.messages[count].SetActive(true);
+            audioSource.PlayOneShot(_phonePing);
             count++;
             yield return 0.0f;
         }

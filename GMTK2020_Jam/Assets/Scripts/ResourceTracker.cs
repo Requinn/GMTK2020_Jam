@@ -25,7 +25,7 @@ public class ResourceTracker : MonoBehaviour
     }
 
     private void Start() {
-        UpdateMeter();
+        if (_meter != null) UpdateMeter();
     }
 
     public void UpdateResource(float delta) { 

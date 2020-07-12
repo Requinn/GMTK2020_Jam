@@ -89,8 +89,9 @@ public class InteractableObject : MonoBehaviour
     protected virtual void OnInteractSuccess()
     {
         Debug.Log(name + ": Click Success");
-        if(audioSource && onInteractSuccessSound)
+        if (audioSource && onInteractSuccessSound) {
             audioSource.PlayOneShot(onInteractSuccessSound);
+        }
     }
     
     protected virtual void OnInteractFailed()
