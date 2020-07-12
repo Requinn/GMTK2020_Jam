@@ -73,9 +73,9 @@ public class InteractableObject : MonoBehaviour
             if (_renderer.GetType() == (typeof(MeshRenderer)))
             {
                 ((MeshRenderer)_renderer).material = _materials[1];
-                ((MeshRenderer)_renderer).material.SetColor("_OutlineColor", _outlineColor);
-                ((MeshRenderer)_renderer).material.SetColor("_Color", Color.white);
-                ((MeshRenderer)_renderer).material.SetFloat("_Outline", thickness);
+                //((MeshRenderer)_renderer).material.SetColor("_OutlineColor", _outlineColor);
+                //((MeshRenderer)_renderer).material.SetColor("_Color", Color.white);
+                //((MeshRenderer)_renderer).material.SetFloat("_Outline", thickness);
             }
             
             if (_renderer.GetType() == (typeof(SpriteRenderer)))
