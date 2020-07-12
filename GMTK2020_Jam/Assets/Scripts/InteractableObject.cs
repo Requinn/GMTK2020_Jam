@@ -9,16 +9,23 @@ public class InteractableObject : MonoBehaviour
     [SerializeField]
     private GameObject _textCanvas;
     [SerializeField]
+    private MeshRenderer _renderer;
+    [SerializeField]
     private Material[] _materials;
     [SerializeField]
     private Color _outlineColor;
 
-    private MeshRenderer _renderer;
+    public float thickness = 1f;
 
     private void Start() {
-        _renderer = GetComponent<MeshRenderer>();
+        if (_renderer == null)
+        {
+            _renderer = GetComponent<MeshRenderer>();
+        }
         _textCanvas.SetActive(false);
         _renderer.material = _materials[0];
+        
+        _textCanvas.SetActive(false);
     }
     public void OnMouseEnter() {
         //Mouse Entered
@@ -26,6 +33,7 @@ public class InteractableObject : MonoBehaviour
         _renderer.material = _materials[1];
         _renderer.material.SetColor("_OutlineColor", _outlineColor);
         _renderer.material.SetColor("_Color", Color.white);
+        _renderer.material.SetFloat("_Outline", thickness);
     }
 
     public void OnMouseExit() {
