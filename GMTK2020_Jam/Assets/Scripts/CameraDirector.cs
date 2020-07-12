@@ -34,7 +34,11 @@ public class CameraDirector : MonoBehaviour
             _scenes[i].camera.GetComponent<AudioListener>().enabled = false;
         }
         
-        ChangeCameraTo(_currentScene);
+        _scenes[_currentScene].sceneRoot.SetActive(true);
+        _scenes[_currentScene].camera.gameObject.SetActive(true);
+        _scenes[_currentScene].camera.GetComponent<AudioListener>().enabled = true;
+        
+        //ChangeCameraTo(_currentScene);
     }
 
     public void NextScene() {
