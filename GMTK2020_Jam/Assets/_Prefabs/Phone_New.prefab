@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1221830559233381223}
   - component: {fileID: 1221830559233381208}
   m_Layer: 0
-  m_Name: Phone 1
+  m_Name: Phone_New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221830559233381222}
-  m_LocalRotation: {x: 0.000000011234272, y: 0.85777795, z: 0.000000018747333, w: 0.5140204}
+  m_LocalRotation: {x: 0, y: 0.85777795, z: 0, w: 0.51402044}
   m_LocalPosition: {x: 3.222, y: 4.33, z: -18.3401}
   m_LocalScale: {x: 1.1941, y: 1.1941, z: 1.1941}
   m_Children:
