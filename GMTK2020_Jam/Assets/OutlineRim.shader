@@ -59,7 +59,8 @@
 		Blend SrcAlpha OneMinusSrcAlpha
 
 		CGPROGRAM
-#pragma vertex vert //Referring to the vertex shader from above
+#pragma vertex vert 
+//Referring to the vertex shader from above
 #pragma fragment frag
 		half4 frag(v2f i) : COLOR{ return i.col; } //color the outline at its respective positions
 		ENDCG

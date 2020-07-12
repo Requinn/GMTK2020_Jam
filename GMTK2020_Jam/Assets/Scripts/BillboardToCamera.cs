@@ -12,6 +12,17 @@ public class BillboardToCamera : MonoBehaviour
         _mainCamera = Camera.main;
     }
     public void Update() {
-        if (gameObject.activeInHierarchy) transform.forward = _mainCamera.transform.forward;
+        if (_mainCamera == null)
+        {
+            _mainCamera = Camera.main;
+        }
+        if (gameObject.activeInHierarchy && _mainCamera != null)
+        {
+            transform.LookAt(transform.position + _mainCamera.transform.rotation * Vector3.forward,
+                _mainCamera.transform.rotation * Vector3.up);
+            
+            
+            //transform.forward = Camera.main.transform.forward;
+        }
     }
 }

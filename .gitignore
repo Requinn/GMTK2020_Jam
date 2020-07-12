@@ -61,3 +61,6 @@ crashlytics-build.properties
 # Jetbrains Rider .idea files
 **/.idea
 **/Plugins/Editor/
+GMTK2020_Jam/Assets/AdvancedPeoplePack2/BlenderSources.unitypackage.meta
+GMTK2020_Jam/Assets/AdvancedPeoplePack2/Shader_HDRP.unitypackage.meta
+GMTK2020_Jam/Assets/AdvancedPeoplePack2/Shader_URP.unitypackage.meta
