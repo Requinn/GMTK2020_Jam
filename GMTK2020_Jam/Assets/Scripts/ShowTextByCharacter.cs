@@ -23,14 +23,27 @@ public class ShowTextByCharacter : MonoBehaviour
     public Button button;
     public Button nextButton;
 
+    public GameObject[] disableOnStartObjects;
+
     public AudioSource typing;
     public AudioClip typingSound;
 
+    private void Start()
+    {
+        _textField.text = "";
+    }
+
     public void StartShowText() {
         if (_isTyping) { return; }
+        _textField.gameObject.SetActive(true);
         _textField.text = "";
         StartCoroutine(ShowText());
         button.gameObject.SetActive(false);
+
+        for (int i = 0; i < disableOnStartObjects.Length; i++)
+        {
+            disableOnStartObjects[i].SetActive(false);
+        }
     }
 
     private IEnumerator ShowText() {
@@ -61,4 +74,6 @@ public class ShowTextByCharacter : MonoBehaviour
         nextButton.gameObject.SetActive(true);
         yield return 0.0f;
     }
+    
+    
 }
