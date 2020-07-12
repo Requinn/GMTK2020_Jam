@@ -1,5 +1,8 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Object in scene that use can mouse over and click on
@@ -27,8 +30,12 @@ public class InteractableObject : MonoBehaviour
     public AudioClip[] onHoverSounds;
     public AudioClip onInteractSuccessSound;
     public AudioClip onInteractFailSound;
-    
-    
+
+    public Action onInteractSuccess = () => { };
+    public Action onInteractFail = () => { };
+
+    public UnityEvent onInteractSuccessUnityAction;
+    public UnityEvent onInteractFailUnityAction;
 
     private void Start() {
         if (_renderer == null)
@@ -79,10 +86,8 @@ public class InteractableObject : MonoBehaviour
         }
         else
         {
-            
             OnInteractFailed();
         }
-        
     }
 
 
@@ -92,13 +97,22 @@ public class InteractableObject : MonoBehaviour
         if (audioSource && onInteractSuccessSound) {
             audioSource.PlayOneShot(onInteractSuccessSound);
         }
+
+        onInteractSuccess?.Invoke();
+        onInteractSuccessUnityAction.Invoke();
+        
     }
     
     protected virtual void OnInteractFailed()
     {
         Debug.Log(name + ":Click Fail");
-        if(audioSource && onInteractFailSound)
+        if (audioSource && onInteractFailSound)
+        {
             audioSource.PlayOneShot(onInteractFailSound);
+        }
+        
+        onInteractFail?.Invoke();
+        onInteractFailUnityAction.Invoke();
     }
     
 }

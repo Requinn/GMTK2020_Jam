@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -18,6 +19,12 @@ public class ResourceTracker : MonoBehaviour
     private float _valueMax;
     [SerializeField]
     private Image _meter;
+    [SerializeField]
+    private TextMeshProUGUI _meterText;
+
+    public bool regenActive = true;
+    public float regenRate = 0.8f;
+    
 
     private void Awake()
     {
@@ -28,10 +35,20 @@ public class ResourceTracker : MonoBehaviour
         if (_meter != null) UpdateMeter();
     }
 
+    private void Update()
+    {
+        UpdateResource(Time.deltaTime * regenRate);
+    }
+
     public void UpdateResource(float delta) { 
         _value += delta;
         _value = Mathf.Clamp(_value, 0.0f, _valueMax);
         if (_meter != null) UpdateMeter();
+
+        if (_meterText)
+        {
+            _meterText.text = string.Format("Willpower ({0})", (int)_value);
+        }
     }
 
     private void UpdateMeter() {
