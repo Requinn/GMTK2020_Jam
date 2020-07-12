@@ -44,7 +44,7 @@ public class ShowTextByCharacter : MonoBehaviour
             sb.Append(_textToShow[i]);
             _textField.text = sb.ToString();
             if (_textToShow[i] == ' ') {
-                typing.Play(0);
+                typing.PlayOneShot(typingSound, 0.7F);
             }
             else if (_textToShow[i] == '.' && (i + 1 < _textToShow.Length && _textToShow[i + 1] == ' ')) {                
                 yield return sentenceWait;
