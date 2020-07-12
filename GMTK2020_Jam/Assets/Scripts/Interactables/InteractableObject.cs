@@ -41,7 +41,8 @@ public class InteractableObject : MonoBehaviour
     
     protected virtual void Start() 
     {
-        _textCanvas.SetActive(false);
+        if(_textCanvas != null)
+            _textCanvas.SetActive(false);
         
         if (_renderer == null)
         {
@@ -64,7 +65,8 @@ public class InteractableObject : MonoBehaviour
         if(!isInteractable)
             return;
         //Mouse Entered
-        _textCanvas.SetActive(true);
+        if(_textCanvas != null)
+            _textCanvas.SetActive(true);
 
         if (_renderer != null)
         {
@@ -91,7 +93,8 @@ public class InteractableObject : MonoBehaviour
 
     public void OnMouseExit() {
         //Mouse Left
-        _textCanvas.SetActive(false);
+        if(_textCanvas != null)
+            _textCanvas.SetActive(false);
         
         if (_renderer != null)
         {

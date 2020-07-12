@@ -24,15 +24,17 @@ public class CameraDirector : MonoBehaviour
         //sort in case I guess, to ensure index matches scene ID
         Array.Sort(_scenes);
         //turn off all cameras, except first
-        _currentScene = 0;
+        //_currentScene = 0;
         _fadeScreen.color = new Color(_fadeScreen.color.r, _fadeScreen.color.g, _fadeScreen.color.b, 0.0f); //alpha 0 for everyone
         _fadeScreen.gameObject.SetActive(false);
 
-        for (int i = 1; i < _scenes.Length; i++){
+        for (int i = 0; i < _scenes.Length; i++){
             _scenes[i].sceneRoot.SetActive(false);
             _scenes[i].camera.gameObject.SetActive(false);
             _scenes[i].camera.GetComponent<AudioListener>().enabled = false;
         }
+        
+        ChangeCameraTo(_currentScene);
     }
 
     public void NextScene() {
@@ -86,7 +88,7 @@ public class CameraDirector : MonoBehaviour
     }
 
     public void ChangeCameraTo(int sceneID) {
-        if (_isFading || sceneID == _currentScene) return;
+        if (_isFading) return;
         StartCoroutine(FadeCameras(sceneID));
     }
 }
