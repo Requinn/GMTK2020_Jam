@@ -21,10 +21,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.2
+    value: 0.73
   size:
     overrideState: 1
-    value: 0.7
+    value: 2.27
   lumContrib:
     overrideState: 1
     value: 0
