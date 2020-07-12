@@ -2,6 +2,7 @@
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Show provided string letter by letter, pausing after periods.
@@ -16,10 +17,7 @@ public class ShowTextByCharacter : MonoBehaviour
     private TextMeshProUGUI _textField;
 
     private bool _isTyping = false;
-
-    public void Start() {
-        _textField = GetComponent<TextMeshProUGUI>();    
-    }
+    public UnityEvent OnTextTypingFinished;
 
     public void StartShowText() {
         if (_isTyping) { return; }
@@ -48,6 +46,8 @@ public class ShowTextByCharacter : MonoBehaviour
             yield return 0.0f;
         }
         _isTyping = false;
+        yield return new WaitForSeconds(5.0f);
+        OnTextTypingFinished.Invoke();
         yield return 0.0f;
     }
 }
