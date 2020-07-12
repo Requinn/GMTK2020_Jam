@@ -16,6 +16,9 @@ public class CameraDirector : MonoBehaviour
     [SerializeField]
     private int _currentScene;
     private bool _isFading = false;
+    
+    //[Space(5)]
+    //
 
     public void Awake() {
         //sort in case I guess, to ensure index matches scene ID
@@ -94,7 +97,7 @@ public class SceneData : IComparable<SceneData> {
     public GameObject sceneRoot;
     public AudioClip musicTrack;
     public AudioClip ambienceTrack;
-    public AudioMixerGroup sceneMixer;
+    //public AudioMixerGroup sceneMixer;
     [Min(0)]
     public int sceneID;
     SceneData(Camera c, int id) {
