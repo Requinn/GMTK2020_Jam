@@ -23,6 +23,9 @@ public class ShowTextByCharacter : MonoBehaviour
     public Button button;
     public Button nextButton;
 
+    public AudioSource typing;
+    public AudioClip typingSound;
+
     public void StartShowText() {
         if (_isTyping) { return; }
         _textField.text = "";
@@ -37,12 +40,13 @@ public class ShowTextByCharacter : MonoBehaviour
         int i = 0;
         StringBuilder sb = new StringBuilder();
         while (i < _textToShow.Length) {
+        
             sb.Append(_textToShow[i]);
             _textField.text = sb.ToString();
             if (_textToShow[i] == ' ') {
-
+                typing.Play(0);
             }
-            else if (_textToShow[i] == '.' && (i + 1 < _textToShow.Length && _textToShow[i + 1] == ' ')) {
+            else if (_textToShow[i] == '.' && (i + 1 < _textToShow.Length && _textToShow[i + 1] == ' ')) {                
                 yield return sentenceWait;
             }else {
                 yield return charWait;
@@ -51,6 +55,7 @@ public class ShowTextByCharacter : MonoBehaviour
             yield return 0.0f;
         }
         _isTyping = false;
+        typing.volume = 0;
         yield return new WaitForSeconds(1.0f);
         OnTextTypingFinished.Invoke();
         nextButton.gameObject.SetActive(true);
