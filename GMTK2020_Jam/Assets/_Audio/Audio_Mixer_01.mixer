@@ -52,7 +52,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Game
+  m_Name: GAME
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 93e1a159236d0a2439ca586ad179266c
   m_Children: []
@@ -137,7 +137,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Music
+  m_Name: MUS
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: be50c63aad7e6f44096af61375e085da
   m_Children: []
@@ -191,8 +191,8 @@ AudioMixerGroupController:
   m_GroupID: 957c6920b95e6224aaf0a73816d392e6
   m_Children:
   - {fileID: -4162953263036479929}
-  - {fileID: -2017595668194765711}
   - {fileID: -8254838396952652548}
+  - {fileID: -2017595668194765711}
   - {fileID: -1946769441261034977}
   m_Volume: 6365fe2626db95b40921f0f3ce5d5f7e
   m_Pitch: 220473a8810fc7941813a12550a6a9e7
