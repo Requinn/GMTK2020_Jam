@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class CameraDirector : MonoBehaviour
@@ -91,6 +92,9 @@ public class CameraDirector : MonoBehaviour
 public class SceneData : IComparable<SceneData> {
     public Camera camera;
     public GameObject sceneRoot;
+    public AudioClip musicTrack;
+    public AudioClip ambienceTrack;
+    public AudioMixerGroup sceneMixer;
     [Min(0)]
     public int sceneID;
     SceneData(Camera c, int id) {
