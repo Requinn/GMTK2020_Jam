@@ -21,9 +21,9 @@ public class InteractableObject : MonoBehaviour
     [SerializeField]
     private Material[] _materials;
     [SerializeField]
-    private Color _outlineColor;
+    private Color _outlineColor = Color.red;
 
-    public float thickness = 1f;
+    public float thickness = 0.2f;
 
     [Space(5)]
     public AudioSource audioSource;
