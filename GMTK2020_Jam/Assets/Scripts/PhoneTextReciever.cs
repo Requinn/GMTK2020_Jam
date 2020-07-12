@@ -15,7 +15,10 @@ public class PhoneTextReciever : MonoBehaviour
     private AudioClip _phonePing;
     [SerializeField]
     private AudioSource audioSource;
+    [SerializeField]
+    private GameObject _closeButton;
 
+    private bool[] beatsComplete = { false };
     private bool _isShowingMessages = false;
 
     private void Start() {
@@ -28,7 +31,8 @@ public class PhoneTextReciever : MonoBehaviour
 
     public void HidePhone() {
         _phoneObj.SetActive(false);
-        for(int i = 0; i < _beats.Length; i++)  {
+        _closeButton.SetActive(false);
+        for (int i = 0; i < _beats.Length; i++)  {
             _beats[i].rootObject.SetActive(false);
         }
     }
@@ -36,7 +40,13 @@ public class PhoneTextReciever : MonoBehaviour
     public void StartPhoneSequence(int storyBeat) {
         if (_isShowingMessages) return;
         ShowPhone();
-        StartCoroutine(ShowMessages(_beats[storyBeat]));
+        if (!beatsComplete[storyBeat]) {
+            beatsComplete[storyBeat] = true;
+            StartCoroutine(ShowMessages(_beats[storyBeat]));
+        }else {
+            _beats[storyBeat].rootObject.SetActive(true);
+            _closeButton.SetActive(true);
+        }
     }
 
     private IEnumerator ShowMessages(StoryBeat beat) {
@@ -52,6 +62,7 @@ public class PhoneTextReciever : MonoBehaviour
             yield return 0.0f;
         }
         _isShowingMessages = false;
+        _closeButton.SetActive(true);
         yield return 0.0f;
     }
 }
