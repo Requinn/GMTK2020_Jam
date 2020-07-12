@@ -3,6 +3,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 /// <summary>
 /// Show provided string letter by letter, pausing after periods.
@@ -19,10 +20,14 @@ public class ShowTextByCharacter : MonoBehaviour
     private bool _isTyping = false;
     public UnityEvent OnTextTypingFinished;
 
+    public Button button;
+    public Button nextButton;
+
     public void StartShowText() {
         if (_isTyping) { return; }
         _textField.text = "";
         StartCoroutine(ShowText());
+        button.gameObject.SetActive(false);
     }
 
     private IEnumerator ShowText() {
@@ -46,8 +51,9 @@ public class ShowTextByCharacter : MonoBehaviour
             yield return 0.0f;
         }
         _isTyping = false;
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(1.0f);
         OnTextTypingFinished.Invoke();
+        nextButton.gameObject.SetActive(true);
         yield return 0.0f;
     }
 }
