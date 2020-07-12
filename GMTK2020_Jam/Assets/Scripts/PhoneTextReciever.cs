@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PhoneTextReciever : MonoBehaviour
 {
@@ -21,12 +22,15 @@ public class PhoneTextReciever : MonoBehaviour
     private bool[] beatsComplete = { false };
     private bool _isShowingMessages = false;
 
+    public AudioMixerSnapshot[] snapshots;
+
     private void Start() {
         HidePhone();
     }
 
     public void ShowPhone() {
         _phoneObj.SetActive(true);
+        snapshots[0].TransitionTo(.01f); //transition to lowpass
     }
 
     public void HidePhone() {
@@ -35,6 +39,7 @@ public class PhoneTextReciever : MonoBehaviour
         for (int i = 0; i < _beats.Length; i++)  {
             _beats[i].rootObject.SetActive(false);
         }
+        snapshots[1].TransitionTo(.01f); //transition to standard pass
     }
 
     public void StartPhoneSequence(int storyBeat) {
